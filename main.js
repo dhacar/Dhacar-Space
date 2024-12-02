@@ -70,7 +70,8 @@ const srRight = ScrollReveal({
     origin: 'right',
     distance: '60px',
     duration: 1800,
-    reset: true,  // This ensures animations replay on scroll
+    // reset: true,  // This ensures animations replay on scroll
+    reset: false,  // Change this to false
     useDelay: 'onload' // This makes sure delay works on every scroll
 })
 
@@ -190,3 +191,74 @@ async function fetchGitHubRepos() {
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchGitHubRepos);
+
+// Form handling
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.form-control');
+    const nameInput = document.querySelector('input[placeholder="Name"]');
+    const emailInput = document.querySelector('input[placeholder="Email"]');
+    const messageInput = document.querySelector('textarea');
+    
+    // Load saved form data if it exists
+    nameInput.value = localStorage.getItem('form_name') || '';
+    emailInput.value = localStorage.getItem('form_email') || '';
+    messageInput.value = localStorage.getItem('form_message') || '';
+
+    // Save form data as user types
+    [nameInput, emailInput, messageInput].forEach(input => {
+        input.addEventListener('input', () => {
+            localStorage.setItem(`form_${input.placeholder.toLowerCase()}`, input.value);
+        });
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Basic validation
+        if (!nameInput.value.trim()) {
+            alert('Please enter your name');
+            nameInput.focus();
+            return;
+        }
+
+        if (!emailInput.value.trim()) {
+            alert('Please enter your email');
+            emailInput.focus();
+            return;
+        }
+
+        if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            alert('Please enter a valid email address');
+            emailInput.focus();
+            return;
+        }
+
+        if (!messageInput.value.trim()) {
+            alert('Please enter your message');
+            messageInput.focus();
+            return;
+        }
+
+        try {
+            // Here you would typically send the form data to a server
+            // For now, we'll just log it and clear the form
+            console.log('Form submitted:', {
+                name: nameInput.value,
+                email: emailInput.value,
+                message: messageInput.value
+            });
+
+            // Clear form and localStorage
+            form.reset();
+            localStorage.removeItem('form_name');
+            localStorage.removeItem('form_email');
+            localStorage.removeItem('form_message');
+
+            alert('Message sent successfully!');
+            
+        } catch (error) {
+            alert('There was an error sending your message. Please try again.');
+            console.error('Form submission error:', error);
+        }
+    });
+});
