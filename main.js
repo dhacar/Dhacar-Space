@@ -104,7 +104,7 @@ sr.reveal('.top-header',{})
 
 // SCROLL REVEAL LEFT_RIGHT ANIMATION 
 // About section components with consistent animations
-srLeft.reveal('.intro-section', {
+srLeft.reveal('.about-info', {
     delay: 100,
     duration: 1800,
     distance: '60px',
@@ -156,3 +156,37 @@ function scrollActive() {
   })
 }
 window.addEventListener('scroll', scrollActive)
+
+// GitHub Repositories Fetch
+async function fetchGitHubRepos() {
+    try {
+        const response = await fetch('https://api.github.com/users/dhacar/repos');
+        const repos = await response.json();
+        
+        const repoList = document.getElementById('repo-list');
+        repoList.innerHTML = ''; // Clear existing content
+        
+        repos.forEach(repo => {
+            const repoBox = document.createElement('div');
+            repoBox.className = 'project-box';
+            
+            repoBox.innerHTML = `
+                <i class="uil uil-github"></i>
+                <h3>${repo.name}</h3>
+                <p>${repo.description || 'No description available'}</p>
+                <div class="repo-stats">
+                    <span><i class="uil uil-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="uil uil-code-branch"></i> ${repo.forks_count}</span>
+                </div>
+                <a href="${repo.html_url}" target="_blank" class="repo-link">View Project</a>
+            `;
+            
+            repoList.appendChild(repoBox);
+        });
+    } catch (error) {
+        console.error('Error fetching repositories:', error);
+    }
+}
+
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', fetchGitHubRepos);
