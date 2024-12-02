@@ -1,13 +1,17 @@
 // navigation bar function
 function myMenuFunction() {
     let menuBtn = document.getElementById("myNavMenu");
+    let menuIcon = document.querySelector(".nav-menu-btn i");
     
-if(menuBtn.className === "nav-menu"){
-    menuBtn.className += "responsive";
-
-}else{
-    menuBtn.className = "nav-menu";
-}
+    if(menuBtn.className === "nav-menu") {
+        menuBtn.className += " responsive";
+        menuIcon.classList.remove("uil-bars");
+        menuIcon.classList.add("uil-times", "active");
+    } else {
+        menuBtn.className = "nav-menu";
+        menuIcon.classList.remove("uil-times", "active");
+        menuIcon.classList.add("uil-bars");
+    }
 }
 
 
