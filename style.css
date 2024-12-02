@@ -365,12 +365,14 @@ nav{
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 50px;
+    gap: 30px;
 
 }
 .col{
     display: flex;
+    flex-direction: column;
     width: 50%;
+    gap: 30px;
 }
 
 /* resuable css */
@@ -408,103 +410,272 @@ h3{
     padding-inline: 20px;
     width: 100%;
     background: var(--color-white);
-    box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
     border-radius: 20px;
-
-
-}
-.about-info p{
-    text-align: center;
-    font-size: 15px;
-    color: #777;
-
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    padding: 35px;
+    justify-content: space-between;
 }
 
-.about-btn button{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+.about-info:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.about-info h3 {
+    transition: color 0.3s ease;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.about-info:hover h3 {
+    color: var(--text-color-third);
+}
+
+.about-btn {
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Social links styling */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
     background: var(--first-color);
     color: var(--color-white);
     border-radius: 30px;
+    border: 2px solid transparent;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
-.about-btn button:hover{
-    background: var(--first-color-hover);
 
+.social-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: var(--color-white);
+    transition: all 0.3s ease;
+    z-index: -1;
 }
 
-.skills-box{
-    margin: 10px;
+.social-btn:hover {
+    color: var(--first-color);
+    border-color: var(--first-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
-.skills-header{
+
+.social-btn:hover::before {
+    width: 100%;
+}
+
+.social-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.social-btn:hover i {
+    transform: scale(1.1);
+    color: var(--first-color);
+}
+
+.about-info p{
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #777;
     margin-bottom: 30px;
-    
 }
-.skills-list{
+
+.skills-box {
+    margin: 0;
+    padding: 35px;
+    background: var(--color-white);
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: calc(50% - 15px);
+}
+
+.skills-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.skills-header {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.skills-header h3 {
+    font-size: 1.5rem;
+    color: var(--text-color-second);
+    text-transform: capitalize;
+}
+
+.skills-header h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 45px;
+    height: 3px;
+    background: var(--text-color-third);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.skills-box:hover .skills-header h3::after {
+    width: 70px;
+}
+
+.skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
-
+    gap: 12px;
 }
-.skills-list span{
+
+.skills-list span {
     font-size: 14px;
     background: var(--first-color);
     color: var(--color-white);
-    padding: 2px 10px;
-    border-radius: 5px;
-
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.experience>i{
-    font-size: 50px;
-    color: #00b5e7;
-    margin-bottom: 25px;
+.skills-list span:hover {
+    background: var(--first-color-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Add a subtle animation for the skills on page load */
+@keyframes skillsFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skills-list span {
+    animation: skillsFadeIn 0.5s ease forwards;
+    animation-delay: calc(0.1s * var(--i));
 }
 
 .experience {
-position: relative;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-width: 50%;
-height: 284.6px;
-background: var(--color-white);
-border-radius: 20px;
-box-shadow: 1px 8px 10px 2px var(--first-shadow-color);
-overflow: hidden;
-margin-left: 30px;
-
-}
-.experience>label{
-    text-align: center;
-    font-size: 15px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 30px;
+    background: var(--color-white);
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    margin-top: 30px;
+    height: calc(50% - 15px);
 }
 
-/* ---- */
-.experience::after {
+.experience::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) scaleX(0);
-    width: 60%;
-    height: 3px;
-    background-color: #4caf50; /* Green underline effect */
-    transform-origin: center;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.experience:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.experience:hover::before {
+    left: 100%;
+}
+
+.experience i {
+    font-size: 3.5rem;
+    color: var(--text-color-third);
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.experience:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.experience h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color-second);
+    margin-bottom: 15px;
+    text-transform: capitalize;
     transition: transform 0.3s ease;
-  }
-  
-  .experience:hover {
-    transform: translateY(-5px); /* Subtle lift on hover */
-    background-color: #e8f5e9; /* Slightly green background */
-  }
-  
-  .experience:hover::after {
-    transform: translateX(-50%) scaleX(1); /* Show underline */
-  }
+}
 
+.experience:hover h3 {
+    transform: scale(1.05);
+}
 
+.experience label {
+    font-size: 1rem;
+    color: #666;
+    position: relative;
+    padding-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.experience label::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: var(--text-color-third);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.experience:hover label::after {
+    width: 80px;
+}
 
 /* project section */
 .project-container{
@@ -883,4 +1054,8 @@ footer{
 
     }
 
+}
+
+.no-underline {
+    text-decoration: none;
 }
