@@ -56,33 +56,36 @@ const sr = ScrollReveal({
     reset: true  // This ensures animations replay on scroll
 })
 
-// Left animations configuration
+// Simple and clean animations for About section
 const srLeft = ScrollReveal({
     origin: 'left',
-    distance: '60px',
-    duration: 1800,
-    reset: true,  // This ensures animations replay on scroll
-    useDelay: 'onload' // This makes sure delay works on every scroll
-})
+    distance: '50px',
+    duration: 1500,
+    reset: false
+});
 
-// Right animations configuration
 const srRight = ScrollReveal({
     origin: 'right',
-    distance: '60px',
-    duration: 1800,
-    // reset: true,  // This ensures animations replay on scroll
-    reset: false,  // Change this to false
-    useDelay: 'onload' // This makes sure delay works on every scroll
-})
+    distance: '50px',
+    duration: 1500,
+    reset: false
+});
 
-// About section reveal with enhanced configuration
+// About info animation
 srLeft.reveal('.about-info', {
-    delay: 100,
+    delay: 100
+});
+
+// Clean skill box animations
+ScrollReveal().reveal('.skills-box', {
+    delay: 200,
+    interval: 200,
+    distance: '20px',
+    origin: 'bottom',
     opacity: 0,
-    mobile: true,  // Enable on mobile devices
-    interval: 100, // Time between animations
-    cleanup: true  // Clean up animations after they complete
-})
+    duration: 1000,
+    easing: 'ease-out'
+});
 
 // home
 sr.reveal('.featured-text-card',{})
